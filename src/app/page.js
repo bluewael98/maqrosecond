@@ -1,53 +1,135 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import TrustedByCompanies from "@/Components/TrustedByCompanies";
-import FeatureSection from "@/Components/FeatureSection";
-import { CarouselData } from "@/Components/CarouselData";
-import LandingCarousel from "@/Components/LandingCarousel";
-
+"use client";
+import FlowCarousel from "@/Components/FlowCarousel";
+import {
+  FeatureCard,
+  TrustedByCompanies,
+  GetStarted,
+  BlogCard,
+  Hero,
+} from "../Components/Index";
+import PricingCards from "@/Components/PricingCards";
+import { BlogData } from "@/Components/ComponentData";
+import CustomMediaQuery from "./Queries/CustomMediaQuery";
+import { Carousel } from "flowbite-react";
+import Link from "next/link";
 
 export default function Home() {
-  return (
-    <main className="pt-[100px] flex flex-col  bg-gray-800 ">
-      <Navbar />
-      {/* Hero section */}
-      <section className="flex flex-col flex-grow text-center justify-center items-center gap-4 overflow-hidden z-10 text-white  h-screen font px-4">
-        <h1 className="heading xxl:text-7xl sm:text-5xl xs:text-3xl xxs:text-xl text font-semibold opacity-80">
-          Porche, full spectrum - full synergy.
-        </h1>
-        <h1 className=" xxs:w-full xxl:max-w-[50%] xxl:text-5xl sm:text-3xl xs:text-xl xxs:text-lg opacity-80">
-          Experience luxury and performance like never before with Porche's
-          iconic lineup of precision-engineered vehicles.
-        </h1>
+  const isSmallScreen = CustomMediaQuery("(max-width: 1199px)");
 
-        <div className="flex justify-center items-center gap-2 opacity-100 sm:flex-row xxs:flex-col ">
-          <button className="bg-primary px-8 py-3 text-white opacity-100 rounded-md min-w-[200px]">
-            Join us now
-          </button>
-          <button className="px-8 py-3  bg-gray-700 text-white rounded-md min-w-[200px]">
-            Request Demo
-          </button>
-        </div>
+  return (
+    <main className="flex flex-col  bg-gray-800 overflow-hidden ">
+      <section className="h-screen w-screen bg-[url('/landingimage.jpg')] bg-fixed bg-cover bg-opacity-50 flex justify-center items-center">
+        <Hero
+          heading="Porche, full spectrum - full synergy."
+          text="Experience luxury and performance like never before with Porche iconic
+      lineup of precision-engineered vehicles."
+          button1="Join us now"
+          button2="Request Demo"
+        />
       </section>
-      <div className="flex w-screen justify-center items-center top-0 absolute z-0 ">
-          <img
-            src="/landingimage.jpg"
-            alt="Picture of the author"
-            className="w-screen h-screen object-cover opacity-70"
+      {/* Body */}
+      <section className="z-[20] bg-gray-800 py-10">
+        {/* Trusted Section */}
+        <section className="flex flex-col items-center justify-center text-white bg-gray-800 w-screen gap-10 mt-[100px] z-[20]">
+          <h2 className="heading xxl:text-5xl sm:text-3xl xxs:text-2xl text font-bold opacity-80">
+            Trusted by
+          </h2>
+          <TrustedByCompanies />
+        </section>
+
+        {/* Feature Section */}
+        <section className="my-[200px] flex flex-col gap-[100px] justify-center items-center ">
+          {isSmallScreen ? (
+            <Carousel leftControl=" " rightControl=" " className="py-10">
+              <FeatureCard
+                title="Feature"
+                imageUrl="/landingimage.jpg"
+                description=" Experience luxury and performance like never before with Porche
+                iconic lineup of precision-engineered vehicles."
+                flipSwitch={false}
+              />
+              <FeatureCard
+                title="Feature"
+                imageUrl="/landingimage.jpg"
+                description=" Experience luxury and performance like never before with Porche
+                iconic lineup of precision-engineered vehicles."
+                flipSwitch={true}
+              />
+            </Carousel>
+          ) : (
+            <>
+              <FeatureCard
+                title="Feature"
+                imageUrl="/landingimage.jpg"
+                description=" Experience luxury and performance like never before with Porche
+                iconic lineup of precision-engineered vehicles."
+                flipSwitch={false}
+              />
+              <FeatureCard
+                title="Feature"
+                imageUrl="/landingimage.jpg"
+                description=" Experience luxury and performance like never before with Porche
+                iconic lineup of precision-engineered vehicles."
+                flipSwitch={true}
+              />
+            </>
+          )}
+        </section>
+
+        {/* Carousel Section */}
+        <section className="my-[100px] z-[21] bg-[url('/landingimage2.jpg')] bg-fixed bg-cover flex justify-center">
+          <FlowCarousel />
+        </section>
+
+        {/* Pricing Cards Section */}
+        <section className="my-[100px] flex justify-center items-center flex-col gap-4 ">
+          <h2 className="heading xxl:text-5xl sm:text-3xl xxs:text-2xl text font-bold opacity-80 text-white text-center">
+            Pricing
+          </h2>
+          <p className="md:max-w-[70%] xxs:w-[85%] sm:w-[70%] text-white  xxl:text-3xl xxs:text-xl xxs:max-w-screen flex flex-col md:gap-4 xxs:gap-2  justify-center items-center opacity-80 text-center">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
+          <PricingCards />
+        </section>
+
+        {/* Get Started Section */}
+        <section className="my-[100px] flex justify-center ">
+          <GetStarted
+            header="Get started!"
+            text="Maecenas ullamcorper ullamcorper est, in condimentum ex volutpat ut.
+            Quisque consequat imperdiet varius."
+            button="Sign up"
           />
-      </div>
-      {/* Trusted by */}
-      <section className="flex flex-col items-center justify-center text-white bg-gray-800 w-screen gap-10 my-[100px]">
-      <h2 className="heading xxl:text-5xl sm:text-3xl xxs:text-2xl text font-semibold opacity-80">
-          Trusted by
-        </h2>
-        <TrustedByCompanies />
-       
+        </section>
+
+        {/* Blog Section */}
+        <section className="my-[100px] flex justify-center items-center flex-col gap-4">
+          <h2 className="heading xxl:text-5xl sm:text-3xl xxs:text-2xl text font-bold opacity-80 text-white">
+            What&apos;s new?
+          </h2>
+          <p className="md:max-w-[70%] xxs:w-[85%] sm:w-[70%] text-center text-white  xxl:text-3xl xxs:text-xl xxs:max-w-screen flex flex-col md:gap-4 xxs:gap-2  justify-center items-center opacity-80">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+            gravida velit vitae commodo fringilla.
+          </p>
+          <div className="flex justify-center items-center gap-4 md:flex-row xxs:flex-col px-4 max-w-[1500px]">
+            {BlogData.map((data, index) => (
+              <BlogCard
+                key={index}
+                imgSrc={data.imageSrc}
+                authorName={data.author}
+                blogTitle={data.text}
+                duration={data.duration}
+                date={data.date}
+              />
+            ))}
+          </div>
+          <Link href="/blog">
+          <button className="px-8 py-3  bg-gray-700 hover:opacity-75 text-white rounded-md min-w-[200px] transition duration-300">
+            See more articles
+          </button>
+          </Link>
+        </section>
       </section>
-      <FeatureSection />
-      <LandingCarousel slides={CarouselData}/>
-    
-      <Footer />
     </main>
   );
 }
